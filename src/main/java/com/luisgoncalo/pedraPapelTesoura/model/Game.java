@@ -6,13 +6,12 @@ public class Game {
     private Player player1;
     private Player maquina;
 
-    boolean jogo_terminado = false;
-
     private int vitoriasJogador1 = 0;
     private int vitoriasMaquina = 0;
 
-    public Game(String player1Name){
-        this.player1 = new Player(player1Name);
+
+    public Game(){
+        this.player1 = new Player("Player 1");
         this.maquina = new Player("Maquina");
     }
 
@@ -25,6 +24,13 @@ public class Game {
         maquina.setJogada(jogadas.get((int) (Math.random() * jogadas.size())));
     }
 
+    public Jogada getJogadaJogador1() {
+        return player1.getJogada();
+    }
+    public Jogada getJogadaMaquina() {
+        return maquina.getJogada();
+    }
+
     public String getResultado() {
 
         Jogada jogadaJogador1 = player1.getJogada();
@@ -32,18 +38,20 @@ public class Game {
 
         if (jogadaJogador1.venceDe(jogadaMaquina)) {
             vitoriasJogador1++;
-            jogo_terminado = true;
             return player1.getName() + " venceu";
         } else if (jogadaMaquina.venceDe(jogadaJogador1)) {
             vitoriasMaquina++;
-            jogo_terminado = true;
             return maquina.getName() + " venceu";
         } else {
             return "Empate";
         }
     }
 
-    public boolean isFinalizado() {
-        return jogo_terminado;
+    public int getVitoriasJogador1() {
+        return vitoriasJogador1;
     }
+    public int getVitoriasMaquina() {
+        return vitoriasMaquina;
+    }
+
 }
